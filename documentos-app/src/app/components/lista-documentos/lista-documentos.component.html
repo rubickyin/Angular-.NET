@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="header">
+    <h1>📁 Documentos</h1>
+    <a routerLink="/subir" class="btn btn-primary">+ Subir Documento</a>
+  </div>
+
+  <div class="loading" *ngIf="cargando">Cargando...</div>
+
+  <div class="empty" *ngIf="!cargando && documentos.length === 0">
+    No hay documentos. <a routerLink="/subir">Sube el primero</a>.
+  </div>
+
+  <table *ngIf="!cargando && documentos.length > 0">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Archivo</th>
+        <th>Tamaño</th>
+        <th>Fecha</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let doc of documentos">
+        <td>{{ doc.id }}</td>
+        <td>{{ doc.nombre }}</td>
+        <td>{{ doc.descripcion || '—' }}</td>
+        <td>{{ doc.nombreArchivo }}</td>
+        <td>{{ formatBytes(doc.tamanio) }}</td>
+        <td>{{ doc.fechaSubida | date:'dd/MM/yyyy' }}</td>
+        <td class="actions">
+          <button class="btn btn-download" (click)="descargar(doc.id)">⬇ Descargar</button>
+          <a [routerLink]="['/editar', doc.id]" class="btn btn-edit">✏ Editar</a>
+          <button class="btn btn-delete" (click)="eliminar(doc.id)">🗑 Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,38 @@
+<div class="form-container">
+  <div class="form-header">
+    <h2>✏️ Editar Documento</h2>
+    <a routerLink="/" class="back-link">← Volver a la lista</a>
+  </div>
+
+  <div class="loading" *ngIf="cargando">Cargando datos...</div>
+  <div class="error-box" *ngIf="error">⚠️ {{ error }}</div>
+
+  <ng-container *ngIf="!cargando">
+    <div class="field">
+      <label>Nombre del documento *</label>
+      <input type="text" [(ngModel)]="nombre" />
+    </div>
+
+    <div class="field">
+      <label>Descripción</label>
+      <textarea [(ngModel)]="descripcion" rows="3"></textarea>
+    </div>
+
+    <div class="field">
+      <label>Reemplazar archivo (opcional)</label>
+      <div class="file-area">
+        <input type="file" id="fileInput" (change)="onArchivoChange($event)" />
+        <label for="fileInput" class="file-label">
+          📎 {{ archivoSeleccionado ? archivoSeleccionado.name : 'Seleccionar nuevo archivo...' }}
+        </label>
+      </div>
+    </div>
+
+    <div class="buttons">
+      <button class="btn btn-primary" (click)="guardar()" [disabled]="guardando">
+        {{ guardando ? '⏳ Guardando...' : '💾 Guardar cambios' }}
+      </button>
+      <a routerLink="/" class="btn btn-secondary">Cancelar</a>
+    </div>
+  </ng-container>
+</div>
