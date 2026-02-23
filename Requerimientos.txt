@@ -1,0 +1,22 @@
+-- Ejecutar en SQL Server Management Studio
+CREATE DATABASE DocumentosDB;
+
+USE DocumentosDB;
+
+CREATE TABLE Documentos (
+    Id          INT AUTO_INCREMENT PRIMARY KEY,
+    Nombre      VARCHAR(255) NOT NULL,
+    Descripcion VARCHAR(500) NULL,
+    NombreArchivo VARCHAR(255) NOT NULL,
+    RutaArchivo   VARCHAR(500) NOT NULL,
+    TipoArchivo   VARCHAR(100) NULL,
+    Tamanio       BIGINT NULL,
+    FechaSubida   DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FechaActualizacion DATETIME ON UPDATE CURRENT_TIMESTAMP NULL
+);
+
+Angular --> Frontend
+
+.NET --> Backend
+
+SQL-laragon-heidiSQL --> Base de datos
